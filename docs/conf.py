@@ -19,7 +19,7 @@ copyright = '2020, Cervi Robotics sp. z o. o.'
 author = 'Piotr Maślanka'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0a1'
+release = '1.0'
 master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
