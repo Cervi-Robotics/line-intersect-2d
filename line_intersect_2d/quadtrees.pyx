@@ -1,5 +1,6 @@
+import typing as tp
 import math
-from satella.coding.sequences import f_range, add_next, half_cartesian, group_quantity
+from satella.coding.sequences import f_range, add_next, half_cartesian
 
 from .basics cimport maximum, minimum, Point, Segment
 
@@ -169,6 +170,19 @@ cdef class Quadtree:
 
 
 cpdef tuple check_intersection(list paths, float split_factor=0.1):
+    """
+    Check whether any number of paths intersect.
+    
+    :param paths: paths to check
+    :type paths: tp.List[Path]
+    :param split_factor: Factor that the tree should be constructed. Eg.
+        for the default value of 0.1 the grid will be divided into 10 rows
+        and 10 columns. Default is 0.1
+    :type split_factor: float
+    :return: a tuple of two segments from different paths that intersect, or
+        None if no intersection 
+    :rtype: tp.Optional[tp.Tuple[Segment, Segment]]
+    """
     cdef:
         int tag
         Path p

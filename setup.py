@@ -10,6 +10,7 @@ def find_pyx(*path) -> tp.List[str]:
 
 
 setup(packages=find_packages(include=['line_intersect_2d']),
+      install_requires=['satella'],
       ext_modules=build([Multibuild('line_intersect_2d', find_pyx('line_intersect_2d')), ],
                         compiler_directives={
                             'language_level': '3',
