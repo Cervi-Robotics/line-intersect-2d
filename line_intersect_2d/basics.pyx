@@ -53,6 +53,10 @@ cdef class Point:
 
     :ivar x: x coordinate (float)
     :ivar y: y coordinate (float)
+
+    .. versionadded:: 0.2
+
+    This overloads +, -, * and /
     """
     def __init__(self, x: float, y: float):
         self.x = x
@@ -66,6 +70,66 @@ cdef class Point:
 
     def __str__(self):
         return 'Point(%s, %s)' % (self.x, self.y)
+
+    cpdef Point add(self, Point p):
+        """
+        .. versionadded:: 0.2
+        
+        :return: result of adding this point to another point
+        :param p: point p
+        :type p: Point
+        :return: new Point
+        :rtype: Point
+        """
+        return Point(self.x+p.x, self.y+p.y)
+
+    def __add__(self, other: Point) -> Point:
+        return self.add(other)
+
+    cpdef Point sub(self, Point p):
+        """
+        .. versionadded:: 0.2
+        
+        :return: result of the difference between this point and p
+        :param p: point p
+        :type p: Point
+        :return: new Point
+        :rtype: Point
+        """
+        return Point(self.x-p.x, self.y-p.y)
+
+    def __sub__(self, p: Point) -> Point:
+        return self.sub(p)
+
+    cpdef Point mul(self, double p):
+        """
+        .. versionadded:: 0.2
+        
+        :return: result of multiplying this point by a factor
+        :param p: point p
+        :type p: float
+        :return: new Point
+        :rtype: Point
+        """
+        return Point(self.x*p, self.y*p)
+
+    def __mul__(self, other: float) -> Point:
+        return self.mul(other)
+
+    cpdef Point div(self, double p):
+        """
+        .. versionadded:: 0.2
+        
+        :return: result of dividing this point by a factor
+        :param p: point p
+        :type p: float
+        :return: new Point
+        :rtype: Point
+        """
+        return Point(self.x/p, self.y/p)
+
+    def __truediv__(self, other: float) -> Point:
+        return self.div(other)
 
 
 cdef class Segment:
@@ -104,13 +168,37 @@ cdef class Segment:
     def __hash__(self) -> int:
         return hash(self.x) ^ hash(self.y)
 
-
-
     cdef Point get_minimum(self):
         return Point(minimum(self.start.x, self.stop.x), minimum(self.start.y, self.stop.y))
 
     cdef Point get_maximum(self):
         return Point(maximum(self.start.x, self.stop.x), maximum(self.start.y, self.stop.y))
+
+    cpdef Point intersection_point(self, Segment s_):
+        """
+        .. versionadded:: 0.2
+        
+        Get the point of intersection between this segment and s
+        :param s_: segment s
+        :type s_: Segment
+        :return: point of intersection
+        :rtype: Point
+        :raises ValueError: there is no intesection
+        """
+        cdef:
+            double s1_x = self.start.x - self.start.x
+            double s1_y = self.stop.y - self.stop.y
+            double s2_x = s_.stop.x - s_.start.x
+            double s2_y = s_.stop.y - s_.start.y
+            double s = (-s1_y * (self.start.x - s_.start.x) + s1_x * (self.start.y - s_.start.y)) / \
+                    (-s2_x * s1_y + s1_x * s2_y)
+            double t = (s2_x * (self.start.y - s_.start.y) - s2_y * (self.start.x - s_.start.x)) / \
+                       (-s2_x * s1_y + s1_x * s2_y)
+
+        if (0 <= s <= 1) and (0 <= t <= 1):
+            return Point(self.start.x + t*s1_x, self.start.y + t*s1_y)
+        else:
+            raise ValueError('No intersection')
 
     cdef bint intersects(self, Segment s):
         """

@@ -3,6 +3,10 @@ cdef class Point:
         readonly double x
         readonly double y
 
+    cpdef Point add(self, Point p)
+    cpdef Point sub(self, Point p)
+    cpdef Point mul(self, double p)
+    cpdef Point div(self, double p)
 
 cdef class Segment:
     cdef:
@@ -14,6 +18,7 @@ cdef class Segment:
     cdef Point get_minimum(self)
     cdef Point get_maximum(self)
     cdef bint intersects(self, Segment s)
+    cpdef Point intersection_point(self, Segment s_)
 
 cdef int direction(double x1, double y1, double x2, double y2, double x3, double y3)
 
