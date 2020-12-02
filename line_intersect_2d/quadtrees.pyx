@@ -39,8 +39,8 @@ cdef class QuadtreeNode:
             raise ValueError(f'Invalid edge number {edge}')
 
     cdef bint contains(self, Point x):
-        return self.start.x <= x.x <= self.stop.x and \
-               self.start.y <= x.y <= self.stop.y
+        return self.top_left.x <= x.x <= self.bottom_right.x and \
+               self.top_left.y <= x.y <= self.bottom_right.y
 
     cdef bint includes(self, Segment s):
         """

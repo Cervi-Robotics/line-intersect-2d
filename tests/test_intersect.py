@@ -1,6 +1,6 @@
 import unittest
 
-from intersect.quadtrees import Path, check_intersection
+from line_intersect_2d.quadtrees import Path, check_intersection
 
 
 class TestIntersect(unittest.TestCase):

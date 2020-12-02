@@ -9,8 +9,7 @@ def find_pyx(*path) -> tp.List[str]:
     return list(find_files(os.path.join(*path), r'(.*)\.pyx', scan_subdirectories=True))
 
 
-setup(name='line_intersect_2d',
-      packages=find_packages(include=['line_intersect_2d']),
+setup(packages=find_packages(include=['line_intersect_2d']),
       ext_modules=build([Multibuild('line_intersect_2d', find_pyx('line_intersect_2d')), ],
                         compiler_directives={
                             'language_level': '3',

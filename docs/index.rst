@@ -20,6 +20,7 @@ Just do
 
 .. code-block:: bash
 
+   pip install snakehouse satella
    pip install line-intersect-2d
 
 
