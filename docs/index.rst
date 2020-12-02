@@ -11,6 +11,16 @@ Welcome to line-intersect-2d's documentation!
    :caption: Contents:
 
    basics
+   usage
+
+
+Installation:
+
+Just do
+
+.. code-block:: bash
+
+   pip install line-intersect-2d
 
 
 Indices and tables
