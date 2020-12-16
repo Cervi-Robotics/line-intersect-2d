@@ -8,3 +8,8 @@
 [![Build status](https://circleci.com/gh/Cervi-Robotics/line-intersect-2d.svg?style=shield)](https://app.circleci.com/pipelines/github/Cervi-Robotics/line-intersect-2d)
 
 A Cython module to check if two paths in 2D intersect
+
+# Compiling from the source
+
+If you want to compile from the source, install snakehouse and satella first.
+
