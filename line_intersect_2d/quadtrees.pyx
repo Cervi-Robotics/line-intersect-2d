@@ -59,7 +59,6 @@ cdef class QuadtreeNode:
                 if self.get_edge(i).intersects(s):
                     result = True
                     break
-        print(f'Decided if {self} collides with {s}, result is {result}')
         return result
 
 
@@ -146,7 +145,6 @@ cdef class Quadtree:
         for q_node in self.nodes:
             if q_node.includes(segment):
                 q_node.append(segment)
-                print(f'Appended {segment} to node {q_node.tag}')
 
     cdef void add_path(self, Path path):
         cdef Segment s
@@ -160,7 +158,6 @@ cdef class Quadtree:
             int i = 0
         for q_node in self.nodes:
             if q_node.segments:
-                print(f'Examining {i}-th node')
                 for s1, s2 in half_cartesian(q_node.segments, include_same_pairs=False):
                     if s1.intersects(s2):
                         if s1.tag != s2.tag:
