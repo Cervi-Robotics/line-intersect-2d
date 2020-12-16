@@ -1,8 +1,9 @@
-from setuptools import find_packages, setup
-from snakehouse import build, Multibuild
+
+from setuptools import find_packages, setup, Extension
 import typing as tp
 import os
 from satella.files import find_files
+from snakehouse import build, Multibuild
 
 
 def find_pyx(*path) -> tp.List[str]:

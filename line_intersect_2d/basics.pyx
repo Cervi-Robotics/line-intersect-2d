@@ -175,14 +175,16 @@ cdef class Segment:
         :raises ValueError: there is no intesection
         """
         cdef:
-            double s1_x = self.start.x - self.start.x
-            double s1_y = self.stop.y - self.stop.y
+            double s1_x = self.stop.x - self.start.x
+            double s1_y = self.stop.y - self.start.y
             double s2_x = sa.stop.x - sa.start.x
             double s2_y = sa.stop.y - sa.start.y
-            double s = (-s1_y * (self.start.x - sa.start.x) + s1_x * (self.start.y - sa.start.y)) / \
-                       (-s2_x * s1_y + s1_x * s2_y)
-            double t = (s2_x * (self.start.y - sa.start.y) - s2_y * (self.start.x - sa.start.x)) / \
-                       (-s2_x * s1_y + s1_x * s2_y)
+            double dividend = (-s2_x * s1_y + s1_x * s2_y)
+            double s = -s1_y * (self.start.x - sa.start.x) + s1_x * (self.start.y - sa.start.y)
+
+            double t = s2_x * (self.start.y - sa.start.y) - s2_y * (self.start.x - sa.start.x)
+        s /= dividend
+        t /= dividend
 
         if (0 <= s <= 1) and (0 <= t <= 1):
             return Point(self.start.x + t*s1_x, self.start.y + t*s1_y)
