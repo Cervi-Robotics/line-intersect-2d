@@ -7,6 +7,7 @@ cdef class Point:
     cpdef Point sub(self, Point p)
     cpdef Point mul(self, double p)
     cpdef Point div(self, double p)
+    cpdef double distance_to(self, Point p)
 
 cdef class Segment:
     cdef:

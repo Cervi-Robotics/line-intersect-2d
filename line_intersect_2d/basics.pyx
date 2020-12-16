@@ -1,3 +1,5 @@
+from libc.math cimport sqrt
+
 cdef enum:
     COLINEAR = 0
     ANTICLOCKWISE = 1
@@ -68,6 +70,15 @@ cdef class Point:
 
     def __str__(self):
         return 'Point(%s, %s)' % (self.x, self.y)
+
+    def __repr__(self):
+        return str(self)
+
+    cpdef double distance_to(self, Point p):
+        cdef:
+            double x = self.x - p.x
+            double y = self.y - p.y
+        return sqrt(x*x+y*y)
 
     cpdef Point add(self, Point p):
         """
@@ -147,6 +158,9 @@ cdef class Segment:
 
     def __str__(self):
         return 'Segment(%s, %s, %s)' % (self.start, self.stop, self.tag)
+
+    def __repr__(self):
+        return str(self)
 
     def __eq__(self, other: Segment) -> bool:
         return ((self.start == other.start) and (self.stop == other.stop)) or \

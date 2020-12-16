@@ -2,6 +2,12 @@ import unittest
 
 
 class TestIntersect(unittest.TestCase):
+    def test_point(self):
+        from line_intersect_2d.basics import Point
+        p1 = Point(10, 0)
+        p2 = Point(10, 10)
+        self.assertEqual(p1.distance_to(p2), 10)
+
     def test_poi(self):
         from line_intersect_2d.basics import Segment, Point
 

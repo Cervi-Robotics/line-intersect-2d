@@ -13,3 +13,10 @@ A Cython module to check if two paths in 2D intersect
 
 If you want to compile from the source, install snakehouse and satella first.
 
+# Change log
+
+## v1.2.4
+
+* fixed `intersection_point`
+* added `distance_to`
+* added `repr` to both `Point` and `Segment
